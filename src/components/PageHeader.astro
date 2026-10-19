@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  highlight?: string;
+  description: string;
+}
+
+const { title, highlight, description } = Astro.props;
+---
+<section class="pt-32 pb-24 bg-sky relative overflow-hidden transition-colors duration-1000">
+  {/* Atmospheric Background (Z-0) */}
+  <div class="absolute inset-0 z-0 pointer-events-none mix-blend-screen">
+    {/* Sun / Light source */}
+    <div class="absolute top-0 right-[20%] w-[40vw] max-w-[500px] aspect-square rounded-full bg-sun blur-[120px] opacity-70 transition-colors duration-1000"></div>
+
+    {/* Moving Clouds */}
+    <div class="absolute inset-0 opacity-50 dark:opacity-10 transition-opacity duration-1000">
+      <div class="absolute top-[5%] left-[5%] w-[35vw] max-w-[450px] animate-[drift_65s_linear_infinite]"><img src="/cloud1.jpg" alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" /></div>
+      <div class="absolute top-[30%] left-[50%] w-[25vw] max-w-[300px] animate-[drift_45s_linear_infinite_reverse]"><img src="/cloud2.jpg" alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" /></div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+    <div class="max-w-3xl">
+      <h1 class="text-5xl md:text-7xl font-serif tracking-tight mb-6">
+        <span class="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">
+          {title}
+        </span>
+        {highlight && (
+          <span class="bg-gradient-to-br from-white/90 to-white/30 bg-clip-text text-transparent ml-2">
+            {highlight}
+          </span>
+        )}
+      </h1>
+      <p class="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+        {description}
+      </p>
+    </div>
+  </div>
+</section>

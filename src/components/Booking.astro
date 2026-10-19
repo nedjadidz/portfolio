@@ -1,0 +1,52 @@
+---
+import { CalEmbed } from "./ui/CalEmbed";
+import { getImage } from "astro:assets";
+import bookingBgSrc from "../assets/booking-bg.jpg";
+import bookingBgNightSrc from "../assets/booking-bg-night.jpg";
+import cloud1Src from "../assets/cloud1.jpg";
+import cloud2Src from "../assets/cloud2.jpg";
+
+const bookingBg = await getImage({ src: bookingBgSrc, format: "webp", quality: 75, width: 1920 });
+const bookingBgNight = await getImage({ src: bookingBgNightSrc, format: "webp", quality: 75, width: 1920 });
+const cloud1 = await getImage({ src: cloud1Src, format: "webp", quality: 60, width: 400 });
+const cloud2 = await getImage({ src: cloud2Src, format: "webp", quality: 60, width: 400 });
+---
+
+<section 
+  id="booking" 
+  class="py-24 md:py-32 relative overflow-hidden z-0 isolate content-visibility-auto"
+>
+  {/* Smooth transition gradient from previous section */}
+  <div class="absolute top-0 left-0 right-0 h-32 md:h-64 bg-gradient-to-b from-canvas to-transparent z-10 pointer-events-none"></div>
+
+  {/* Background images for light/dark mode */}
+  <img src={bookingBg.src} alt="Booking background" class="w-full h-full object-cover object-bottom absolute inset-0 -z-10 transition-opacity duration-[1500ms] ease-in-out dark:opacity-0" loading="lazy" />
+  <img src={bookingBgNight.src} alt="Booking background night" class="w-full h-full object-cover object-bottom absolute inset-0 -z-10 transition-opacity duration-[1500ms] ease-in-out opacity-0 dark:opacity-100" loading="lazy" />
+  {/* Using white/10 or black/60 so it works perfectly with Tailwind */}
+  <div class="absolute inset-0 bg-white/10 dark:bg-black/60 z-0 pointer-events-none"></div>
+
+  {/* Cloud Layers using mix-blend-screen - reduced to 4 clouds for performance */}
+  <div class="absolute inset-0 z-0 pointer-events-none mix-blend-screen overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] transition-opacity duration-[1500ms] dark:opacity-40" aria-hidden="true">
+    <div class="absolute top-[-5%] left-[-10%] w-[25vw] max-w-[300px] animate-[drift_45s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+    <div class="absolute top-[5%] left-[20%] w-[20vw] max-w-[250px] animate-[drift_95s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] scale-x-[-1]" loading="lazy" /></div>
+    <div class="absolute top-[8%] left-[50%] w-[26vw] max-w-[350px] animate-[drift_110s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+    <div class="absolute top-[2%] left-[75%] w-[22vw] max-w-[280px] animate-[drift_80s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] scale-x-[-1]" loading="lazy" /></div>
+  </div>
+  <div class="container mx-auto px-6 max-w-7xl relative z-10">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs uppercase tracking-[0.2em] text-ink-muted font-medium block mb-3">
+        Let's Talk
+      </span>
+      <h2 class="text-3xl md:text-5xl font-serif text-ink tracking-tight">
+        Book a <span class="text-ink/60">discovery call</span>
+      </h2>
+      <p class="mt-4 text-lg text-ink-muted leading-relaxed">
+        Choose a time below to discuss your project, ideas, or how we can collaborate to elevate your brand.
+      </p>
+    </div>
+
+    <div class="max-w-5xl mx-auto h-[700px] relative z-10">
+      <CalEmbed client:visible={{ rootMargin: "350px" }} />
+    </div>
+  </div>
+</section>

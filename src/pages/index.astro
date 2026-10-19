@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { Navbar } from "../components/ui/Navbar"
+import Hero from "../components/Hero.astro"
+import About from "../components/About.astro"
+import Services from "../components/Services.astro"
+import Work from "../components/Work.astro"
+import Booking from "../components/Booking.astro"
+---
+
+<Layout title="Lumina Studio | Creative Professional">
+  <Navbar client:load />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Work />
+    <Booking />
+  </main>
+</Layout>

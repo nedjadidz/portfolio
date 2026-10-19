@@ -1,0 +1,28 @@
+---
+import { ServicesGrid } from "./ui/ServicesGrid";
+import { ArrowRight } from "lucide-react";
+---
+
+<section id="services" class="py-24 md:py-32 bg-[#F9F9F7] dark:bg-canvas-raised border-y border-line relative overflow-hidden transition-colors duration-1000">
+  <div class="container mx-auto px-6 max-w-7xl relative z-10">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="max-w-2xl">
+        <span class="text-xs uppercase tracking-[0.2em] text-ink-muted font-medium block mb-3">
+          Our Services
+        </span>
+        <h2 class="text-3xl md:text-5xl font-serif text-ink tracking-tight">
+          Comprehensive solutions for <span class="text-ink/40">digital growth</span>
+        </h2>
+      </div>
+      <a 
+        href="/services" 
+        class="inline-flex items-center gap-2 text-sm font-bold text-ink hover:opacity-70 transition-opacity whitespace-nowrap"
+      >
+        <span>View all services</span>
+        <ArrowRight size={16} />
+      </a>
+    </div>
+
+    <ServicesGrid client:visible />
+  </div>
+</section>

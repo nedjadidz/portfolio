@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { Navbar } from "../components/ui/Navbar"
+import PageHeader from "../components/PageHeader.astro"
+import Work from "../components/Work.astro"
+---
+
+<Layout title="Projects | Lumina Studio">
+  <Navbar client:load />
+  
+  <main>
+    <PageHeader 
+      title="Selected" 
+      highlight="Works" 
+      description="A collection of digital experiences designed with focus on aesthetics, usability, and modern web technologies." 
+    />
+    <Work hideTitle={true} />
+  </main>
+</Layout>

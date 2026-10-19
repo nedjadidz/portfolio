@@ -1,0 +1,33 @@
+---
+// src/components/About.astro
+---
+<section id="about" class="bg-[#F9F9F7] py-32 md:py-40 px-6 relative overflow-hidden">
+  {/* Subtle sky-blue atmospheric detail */}
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-200/20 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3" aria-hidden="true"></div>
+
+  <div class="container mx-auto max-w-6xl relative z-10">
+    <div class="mb-12 md:mb-20">
+      <span class="text-xs uppercase tracking-[0.2em] text-ink-muted font-medium">
+        About
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+      {/* Left Column: Large Serif Heading */}
+      <div class="lg:col-span-7">
+        <h2 class="font-serif text-4xl md:text-5xl lg:text-[4.5rem] text-ink leading-[1.05] tracking-tight">
+          We craft digital spaces that feel as natural as breathing. Rooted in clarity, intention, and quiet elegance.
+        </h2>
+      </div>
+      
+      {/* Right Column: Readable Sans Paragraph */}
+      <div class="lg:col-span-5 lg:pt-3">
+        <p class="font-sans text-lg md:text-xl text-ink-muted leading-relaxed">
+          Our approach blends deep strategic thinking with meticulous visual execution. We believe the best design gets out of the way, allowing the underlying message to speak directly to the mind.
+          <br/><br/>
+          By stripping away the unnecessary, we create room for meaningful interaction, ensuring every touchpoint is purposeful and beautifully refined.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

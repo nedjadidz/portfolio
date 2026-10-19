@@ -1,0 +1,360 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+@import "@fontsource/geist-sans";
+
+/* Visual Design System - Minimal Editorial · Natural Dreamy · Subtle Liquid Glass */
+
+@theme {
+  --font-display: "Geist Sans", Inter, system-ui, sans-serif;
+  --font-sans: "Geist Sans", Inter, system-ui, sans-serif;
+  --font-serif: "Geist Sans", Inter, system-ui, sans-serif;
+
+  /* We use the custom CSS properties from the root to map to Tailwind theme */
+  --color-canvas: var(--canvas);
+  --color-canvas-raised: var(--canvas-raised);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-sky: var(--sky);
+  --color-sky-deep: var(--sky-deep);
+  --color-leaf: var(--leaf);
+  --color-leaf-deep: var(--leaf-deep);
+  --color-sun: var(--sun);
+  --color-cloud: var(--cloud);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  --color-glass-fill: var(--glass-fill);
+  --color-glass-fill-strong: var(--glass-fill-strong);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
+  /* Liquid Glass Support (previous vars) */
+  --color-glass-light: rgba(255, 255, 255, 0.1);
+  --color-glass-dark: rgba(0, 0, 0, 0.1);
+  --color-glass-border-light: rgba(255, 255, 255, 0.2);
+  --color-glass-border-dark: rgba(255, 255, 255, 0.05);
+
+  /* Shadcn UI mappings mapped to new semantic colors */
+  --color-background: var(--canvas);
+  --color-foreground: var(--ink);
+  --color-card: var(--canvas-raised);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--canvas-raised);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--canvas);
+  --color-secondary: rgba(27, 34, 32, 0.04);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: rgba(27, 34, 32, 0.04);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: rgba(27, 34, 32, 0.04);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: var(--canvas);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: rgba(84, 127, 148, 0.48); /* Focus ring from design doc */
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+  
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lifted: var(--shadow-lifted);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-drift: drift linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translate3d(-20%, 0, 0); }
+  to { transform: translate3d(120%, 0, 0); }
+}
+
+@layer base {
+  :root {
+    /* Typography */
+    --text-xs: 0.75rem;   /* 12px */
+    --text-sm: 0.875rem;  /* 14px */
+    --text-base: 1rem;    /* 16px */
+    --text-lg: 1.125rem;  /* 18px */
+    --text-xl: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+    --text-2xl: clamp(2rem, 1.45rem + 2.2vw, 3.5rem);
+    --text-3xl: clamp(3.25rem, 2.1rem + 5vw, 6.5rem);
+    --leading-tight: 0.95;
+    --leading-display: 1.02;
+    --leading-body: 1.55;
+    --tracking-label: 0.08em;
+
+    /* Base canvas and ink */
+    --canvas: #ffffff;
+    --canvas-raised: #ffffff;
+    --ink: #1b2220;
+    --ink-muted: #5f6863;
+    --ink-faint: #7b8580;
+    --line: rgba(27, 34, 32, 0.14);
+    --line-strong: rgba(27, 34, 32, 0.24);
+
+    /* Atmospheric accents: quiet, not promotional */
+    --sky: #7dd3fc;
+    --sky-deep: #0ea5e9;
+    --leaf: #809b7a;
+    --leaf-deep: #46604b;
+    --sun: #e8d5ae;
+    --cloud: #f8faf8;
+
+    /* Feedback colors; use only when semantic meaning is needed */
+    --success: #3f7559;
+    --warning: #996e22;
+    --danger: #a64f4a;
+
+    /* Spacing and sizing */
+    --space-1: 0.25rem;  /* 4px */
+    --space-2: 0.5rem;   /* 8px */
+    --space-3: 0.75rem;  /* 12px */
+    --space-4: 1rem;     /* 16px */
+    --space-5: 1.5rem;   /* 24px */
+    --space-6: 2rem;     /* 32px */
+    --space-7: 3rem;     /* 48px */
+    --space-8: 4.5rem;   /* 72px */
+    --space-9: 6rem;     /* 96px */
+    --space-10: 9rem;    /* 144px */
+
+    /* Layout and grid */
+    --content-max: 82rem;       /* 1312px */
+    --content-reading: 42rem;   /* 672px */
+    --gutter: clamp(1.25rem, 4vw, 4rem);
+    --grid-gap: clamp(1rem, 2vw, 2rem);
+
+    /* Borders, radius, and elevation */
+    --radius-sm: 0.5rem;   /* 8px */
+    --radius-md: 0.875rem; /* 14px */
+    --radius-lg: 1.25rem;  /* 20px */
+    --radius-pill: 999px;
+    --shadow-soft: 0 0.75rem 2.5rem rgba(34, 59, 54, 0.10);
+    --shadow-lifted: 0 1.25rem 3.75rem rgba(34, 59, 54, 0.15);
+
+    /* Liquid Glass */
+    --glass-fill: rgba(255, 255, 255, 0.52);
+    --glass-fill-strong: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.62);
+    --glass-highlight: rgba(255, 255, 255, 0.28);
+    --glass-blur: 18px;
+
+    /* Motion */
+    --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 160ms;
+    --duration-base: 280ms;
+    --duration-slow: 600ms;
+
+    --focus-ring: 0 0 0 3px rgba(84, 127, 148, 0.48);
+  }
+
+  .dark {
+    --canvas: #121413;
+    --canvas-raised: #1a1d1b;
+    --ink: #fcfcf9;
+    --ink-muted: #9ba49f;
+    --ink-faint: #6c7672;
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.24);
+
+    --glass-fill: rgba(20, 24, 22, 0.52);
+    --glass-fill-strong: rgba(20, 24, 22, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.08);
+
+    /* Atmospheric night colors */
+    --sky: #0f172a;
+    --sky-deep: #020617;
+    --sun: #e2e8f0;
+    --cloud: #1e293b;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-size: var(--text-base);
+    line-height: var(--leading-body);
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+/* Utilities classes provided by the document */
+@layer components {
+  .container {
+    width: min(100% - (var(--gutter) * 2), var(--content-max));
+    margin-inline: auto;
+  }
+
+  .glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 
+      0 12px 40px -10px rgba(0, 0, 0, 0.15), 
+      inset 0 1px 2px rgba(255, 255, 255, 1), 
+      inset 0 -1px 2px rgba(255, 255, 255, 0.4),
+      inset 1px 0 2px rgba(255, 255, 255, 0.5),
+      inset -1px 0 2px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
+  
+  .glass:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 16px 40px -10px rgba(0, 0, 0, 0.2), 
+      inset 0 1px 2px rgba(255, 255, 255, 1), 
+      inset 0 -1px 2px rgba(255, 255, 255, 0.5),
+      inset 1px 0 2px rgba(255, 255, 255, 0.7),
+      inset -1px 0 2px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@layer utilities {
+  /* Hardware acceleration and will-change performance optimizations */
+  .transform-gpu {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-transform-opacity {
+    will-change: transform, opacity;
+  }
+
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 700px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@keyframes accordion-down {
+  from { height: 0 }
+  to { height: var(--radix-accordion-content-height) }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height) }
+  to { height: 0 }
+}
+
+@keyframes swim {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -15px, 0) rotate(2deg); }
+}
+
+@keyframes glare {
+  0%, 70% { transform: translate3d(-200%, 0, 0) skewX(-30deg); opacity: 0; }
+  85% { opacity: 0.6; }
+  100% { transform: translate3d(300%, 0, 0) skewX(-30deg); opacity: 0; }
+}
+
+@layer components {
+  .glass-badge {
+    position: relative;
+    overflow: hidden;
+    animation: swim 6s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  .glass-badge::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: translate3d(-200%, 0, 0) skewX(-30deg);
+    animation: glare 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+}
+
+/* Shooting Stars Animation */
+@keyframes fall {
+  0% {
+    transform: rotate(var(--angle, 75deg)) translateX(-100px);
+    width: 0px;
+    opacity: 0;
+  }
+  2% {
+    width: 150px;
+    opacity: 1;
+  }
+  10% {
+    transform: rotate(var(--angle, 75deg)) translateX(1000px);
+    width: 0px;
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(var(--angle, 75deg)) translateX(1000px);
+    width: 0px;
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+  animation: fall var(--duration, 15s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 12px 3px rgba(255,255,255,1);
+}

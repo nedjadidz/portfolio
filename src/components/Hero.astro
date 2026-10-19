@@ -1,0 +1,148 @@
+---
+// Hero.astro
+import { 
+  Calendar, 
+  ArrowRight,
+  Type,
+  Grid,
+  Square,
+  Layout,
+  Layers,
+  Palette,
+  PenTool,
+  ZoomIn,
+  MousePointer2
+} from 'lucide-react';
+import { NoiseBackground } from './ui/noise-background';
+import { getImage } from 'astro:assets';
+import heroBgSrc from '../assets/hero-bg.jpg';
+import heroBgNightSrc from '../assets/hero-bg-night.jpg';
+import heroFgSrc from '../assets/hero-fg.png';
+import cloud1Src from '../assets/cloud1.jpg';
+import cloud2Src from '../assets/cloud2.jpg';
+
+// Optimize images: convert to WebP with appropriate quality and sizing
+const heroBg = await getImage({ src: heroBgSrc, format: 'webp', quality: 75, width: 1920 });
+const heroBgNight = await getImage({ src: heroBgNightSrc, format: 'webp', quality: 75, width: 1920 });
+const heroFg = await getImage({ src: heroFgSrc, format: 'webp', quality: 80, width: 1920 });
+const cloud1 = await getImage({ src: cloud1Src, format: 'webp', quality: 60, width: 400 });
+const cloud2 = await getImage({ src: cloud2Src, format: 'webp', quality: 60, width: 400 });
+---
+<section class="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-ink">
+  {/* Flattened Background + Clouds for backdrop-filter support */}
+  <div class="absolute inset-0 z-0 isolate">
+    <img src={heroBg.src} alt="Hero background" class="w-full h-full object-cover object-top absolute inset-0 -z-10 transition-opacity duration-[1500ms] ease-in-out dark:opacity-0" loading="eager" fetchpriority="high" />
+    <img src={heroBgNight.src} alt="Hero background night" class="w-full h-full object-cover object-top absolute inset-0 -z-10 transition-opacity duration-[1500ms] ease-in-out opacity-0 dark:opacity-100" loading="eager" />
+
+    {/* Shooting Stars */}
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div class="shooting-star top-[-5%] left-[80%]" style="--angle: 140deg; --duration: 35s; --delay: 0s;"></div>
+      <div class="shooting-star top-[5%] left-[95%]" style="--angle: 135deg; --duration: 40s; --delay: 4s;"></div>
+      <div class="shooting-star top-[15%] left-[70%]" style="--angle: 145deg; --duration: 30s; --delay: 9s;"></div>
+      <div class="shooting-star top-[25%] left-[100%]" style="--angle: 138deg; --duration: 38s; --delay: 15s;"></div>
+      <div class="shooting-star top-[0%] left-[50%]" style="--angle: 142deg; --duration: 45s; --delay: 20s;"></div>
+    </div>
+
+    {/* Cloud Layers - Reduced to 8 for performance (was 30+) */}
+    <div class="absolute top-0 left-0 right-0 h-[45vh] z-10 pointer-events-none mix-blend-screen overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_100%)] transition-opacity duration-[1500ms] dark:opacity-40" aria-hidden="true">
+      <div class="absolute top-[-5%] left-[-10%] w-[25vw] max-w-[300px] animate-[drift_51s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+      <div class="absolute top-[2%] left-[15%] w-[20vw] max-w-[250px] animate-[drift_152s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] scale-x-[-1]" loading="lazy" /></div>
+      <div class="absolute top-[8%] left-[30%] w-[30vw] max-w-[400px] animate-[drift_221s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+      <div class="absolute top-[-2%] left-[50%] w-[22vw] max-w-[280px] animate-[drift_185s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+      <div class="absolute top-[12%] left-[65%] w-[28vw] max-w-[350px] animate-[drift_120s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] scale-x-[-1]" loading="lazy" /></div>
+      <div class="absolute top-[5%] left-[80%] w-[20vw] max-w-[260px] animate-[drift_128s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+      <div class="absolute top-[18%] left-[5%] w-[24vw] max-w-[310px] animate-[drift_365s_linear_infinite]"><img src={cloud1.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" loading="lazy" /></div>
+      <div class="absolute top-[22%] left-[45%] w-[26vw] max-w-[330px] animate-[drift_190s_linear_infinite_reverse]"><img src={cloud2.src} alt="" class="w-full h-auto object-contain [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)] scale-x-[-1]" loading="lazy" /></div>
+    </div>
+  </div>
+
+  {/* Floating Text Badges (Z-25) */}
+  <div class="absolute inset-0 z-25 pointer-events-none block scale-75 md:scale-100 origin-center">
+    <div class="absolute top-[18%] left-[8%] bg-canvas/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm text-white font-medium text-sm glass-badge">
+      Web Designer
+    </div>
+    <div class="absolute top-[14%] left-[25%] bg-canvas/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm text-white font-medium text-sm glass-badge hidden sm:block" style="animation-delay: -1s;">
+      UI/UX Designer
+    </div>
+    <div class="absolute top-[16%] left-[45%] bg-canvas/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm text-white font-medium text-sm glass-badge hidden md:block" style="animation-delay: -2.5s;">
+      Creative Developer
+    </div>
+    <div class="absolute top-[13%] right-[8%] bg-canvas/30 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/40 shadow-sm text-white font-medium text-sm glass-badge" style="animation-delay: -4s;">
+      Visual Designer
+    </div>
+  </div>
+
+  {/* Floating Icon Badges (Z-25) */}
+  <div class="absolute inset-0 z-25 pointer-events-none block scale-75 md:scale-100 origin-center">
+    {/* Left Side Icons - Forming a curve */}
+    <div class="absolute top-[55%] left-[8%] md:left-[12%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -0.2s;">
+      <Type size={20} />
+    </div>
+    <div class="absolute top-[65%] left-[12%] md:left-[18%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -1.2s;">
+      <Grid size={20} />
+    </div>
+    <div class="absolute top-[72%] left-[16%] md:left-[26%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge hidden sm:block" style="animation-delay: -3.7s;">
+      <Square size={20} />
+    </div>
+    <div class="absolute top-[76%] left-[25%] md:left-[35%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge hidden md:block" style="animation-delay: -2.1s;">
+      <Layout size={20} />
+    </div>
+
+    {/* Right Side Icons - Forming a curve */}
+    <div class="absolute top-[76%] right-[25%] md:right-[35%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge hidden md:block" style="animation-delay: -1.5s;">
+      <Layers size={20} />
+    </div>
+    <div class="absolute top-[72%] right-[16%] md:right-[26%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge hidden sm:block" style="animation-delay: -4.4s;">
+      <Palette size={20} />
+    </div>
+    <div class="absolute top-[65%] right-[12%] md:right-[18%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -2.9s;">
+      <MousePointer2 size={20} />
+    </div>
+    <div class="absolute top-[55%] right-[8%] md:right-[12%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -0.8s;">
+      <PenTool size={20} />
+    </div>
+    <div class="absolute top-[45%] right-[12%] md:right-[16%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -5.6s;">
+      <ZoomIn size={20} />
+    </div>
+    <div class="absolute top-[35%] right-[6%] md:right-[10%] bg-canvas/30 backdrop-blur-md p-3.5 rounded-2xl border border-white/40 shadow-sm text-white glass-badge" style="animation-delay: -3.3s;">
+      <PenTool size={20} class="rotate-90" />
+    </div>
+  </div>
+
+  {/* User's Photo Foreground (Cutout) */}
+  <div class="absolute inset-0 z-20 pointer-events-none">
+    <img src={heroFg.src} alt="" class="w-full h-full object-cover object-top transition-all duration-[1500ms] dark:brightness-75 dark:contrast-125" loading="eager" onerror="this.style.display='none'" />
+  </div>
+
+  {/* Title (Behind User, Z-15) */}
+  <div class="absolute inset-x-0 top-[22%] z-[15] container mx-auto px-6 text-center flex flex-col items-center">
+    <h1 class="font-sans font-black text-4xl md:text-6xl lg:text-7xl text-white leading-display tracking-tight max-w-4xl mx-auto drop-shadow-md">
+      Designing spaces for <br class="hidden md:block"/> nature and mind.
+    </h1>
+  </div>
+
+  {/* Actions (In front of User, Bottom, Z-30) */}
+  <div class="absolute inset-x-0 bottom-12 z-30 container mx-auto px-6 max-w-5xl flex flex-col sm:flex-row items-center justify-between gap-4">
+    <NoiseBackground 
+      client:idle 
+      containerClassName="w-full sm:w-fit p-1 rounded-pill mx-auto !bg-transparent border-none shadow-none"
+      gradientColors={["rgb(255, 100, 150)", "rgb(100, 150, 255)", "rgb(255, 200, 100)"]}
+    >
+      <a href="https://cal.com/mohammed-nedjadi-odx7mx" target="_blank" rel="noopener noreferrer" class="bg-canvas inline-flex w-full items-center justify-center px-8 py-4 text-base font-bold text-ink rounded-pill shadow-[0px_2px_0px_0px_var(--color-neutral-50)_inset,0px_0.5px_1px_0px_var(--color-neutral-400)] hover:-translate-y-0.5 transition-all duration-base ease-organic group transform-gpu will-change-transform">
+        <Calendar className="w-5 h-5 mr-2 opacity-80 group-hover:scale-110 transition-transform duration-base transform-gpu will-change-transform" />
+        Book a meet now for free
+      </a>
+    </NoiseBackground>
+
+    <NoiseBackground 
+      client:idle 
+      containerClassName="w-full sm:w-fit p-1 rounded-pill mx-auto !bg-transparent border-none shadow-none"
+      gradientColors={["rgb(255, 255, 255)", "rgb(200, 220, 255)", "rgb(255, 255, 255)"]}
+    >
+      <a href="/projects" class="glass inline-flex w-full items-center justify-center px-8 py-4 text-base font-medium text-white rounded-pill hover:shadow-md hover:-translate-y-0.5 hover:bg-glass-fill-strong transition-all duration-base ease-organic group transform-gpu will-change-transform">
+        See projects
+        <ArrowRight className="w-5 h-5 ml-2 opacity-80 group-hover:translate-x-1 transition-transform duration-base transform-gpu will-change-transform" />
+      </a>
+    </NoiseBackground>
+  </div>
+</section>

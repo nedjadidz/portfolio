@@ -1,0 +1,123 @@
+---
+import { ExpandableProjectGrid } from "./ui/ExpandableProjectGrid";
+
+interface Props {
+  hideTitle?: boolean;
+}
+
+const { hideTitle = false } = Astro.props;
+
+const projects = [
+  {
+    title: "Swalis UX/UI Case Study",
+    description: "A comprehensive UX/UI case study for Swalis, an e-commerce platform, focusing on enhancing user experience and modern interface design.",
+    image: "/images/projects/swalis/cover.png",
+    link: "/projects/swalis",
+    caseStudy: {
+      subtitle: "E-commerce website for a modern beauty brand",
+      heroImage: "/images/projects/swalis/cover.png",
+      externalLink: "https://www.behance.net/gallery/254160315/Swalis-UXUI-Case-Study-E-commerce-Website",
+      roles: ["UX Strategy", "Information Architecture", "UI Design", "Responsive Design"],
+      timeline: "Completed",
+      tools: ["Figma", "WordPress", "UX/UI Design"],
+      sections: [
+        {
+          title: "The Challenge",
+          content: "Beauty e-commerce websites often need to balance two things: A strong visual experience that communicates quality and trust, and a simple shopping experience that helps users quickly find and purchase the right products. For Swalis, the challenge was to design an experience that could make product discovery effortless, create a premium beauty-focused visual identity, organize a large amount of product information clearly, build trust throughout the shopping journey, reduce unnecessary friction during the purchasing process, and work naturally across desktop and mobile. The result needed to feel less like a traditional online store and more like a carefully designed beauty experience.",
+          image: "/images/projects/swalis/media_1787700897592.png"
+        },
+        {
+          title: "The Approach",
+          content: "I approached the project from both a user experience and visual design perspective. Instead of starting with visual styling alone, I first focused on understanding how a customer would move through the website — from discovering a product to evaluating it and eventually making a purchase. The experience was structured around three main principles:\n\n**Discover**: Help users quickly explore products and categories without feeling overwhelmed.\n**Understand**: Present product information, pricing and relevant details in a clear and easy-to-scan way.\n**Purchase**: Make the path from product discovery to checkout as simple and frictionless as possible.",
+          image: "/images/projects/swalis/media_1787700909125.png"
+        },
+        {
+          title: "Information Architecture",
+          content: "The website structure was designed around the way users naturally shop for beauty products. The main navigation provides quick access to product categories while keeping the interface visually clean. The structure includes: Homepage, Product categories, Product listing, Product details, Shopping cart, Checkout, and Account / customer area. The goal was to keep the navigation predictable and reduce the number of steps required to reach important products.",
+          image: "/images/projects/swalis/media_1787700921549.png"
+        },
+        {
+          title: "Homepage & Product Discovery",
+          content: "The homepage was designed as the main entry point into the Swalis experience. Rather than overwhelming users with too many products immediately, the layout creates a clear visual hierarchy that guides users through the brand and its products. The page introduces the brand, featured products, main categories, promotional content, and product collections. Product discovery was one of the key parts of the experience. The interface uses clear product cards, categories and visual grouping to make browsing easier. Each product card communicates the most important information at a glance, allowing users to scan products quickly without opening every product page.",
+          image: "/images/projects/swalis/media_1787700952558.png"
+        },
+        {
+          title: "Visual Direction & UI Design",
+          content: "The visual language was inspired by the beauty industry while avoiding the overly decorative style often used by cosmetics websites. The direction combines minimal layouts, elegant typography, generous whitespace, soft visual elements, high-quality product imagery, and a strong visual hierarchy. The interface was designed around consistency and simplicity. Typography, spacing, buttons, cards and product components follow a consistent visual system throughout the experience. This creates a more predictable interface and allows users to focus on the products instead of learning how the website works.",
+          image: "/images/projects/swalis/media_1787700965629.png"
+        },
+        {
+          title: "Responsive & Conversion-Focused",
+          content: "The experience was designed with different screen sizes in mind. The desktop layout provides a spacious shopping experience, while the mobile experience prioritizes the most important actions and information. Navigation, product grids, product details and purchasing interactions were adapted to work naturally on smaller screens. Every major interaction was considered from a conversion perspective. The design aims to reduce friction by making important actions obvious and keeping unnecessary distractions away from the purchasing journey. Key conversion considerations included clear calls to action, strong product presentation, easy product discovery, accessible pricing information, simple navigation, and reduced steps toward purchase."
+        },
+        {
+          title: "The Design System",
+          content: "A comprehensive design system was established to ensure consistency across the entire product. This includes a typography scale optimized for readability and elegance, alongside a carefully curated color palette that reflects the brand's premium identity.",
+          image: "/images/projects/swalis/design-system.png"
+        },
+        {
+          title: "Grid System",
+          content: "A robust grid system was implemented to handle complex responsive layouts. The grid ensures that spacing, alignment, and proportions remain harmonious whether viewed on a large desktop monitor or a small mobile screen.",
+          image: "/images/projects/swalis/grid-system.png"
+        },
+        {
+          title: "UI Components",
+          content: "The interactive components library was built with scalability in mind. Every button, input field, and card follows the established design tokens, creating a cohesive visual language that speeds up development and maintains high visual standards.",
+          image: "/images/projects/swalis/ui-components.png"
+        },
+        {
+          title: "Full Page Layout",
+          content: "Bringing all the pieces together, the final page layouts demonstrate how the typography, colors, grid, and components combine to create a stunning, conversion-optimized shopping experience.",
+          image: "/images/projects/swalis/full-layout.png"
+        }
+      ]
+    }
+  },
+  {
+    title: "Eco-Lumina App",
+    description: "A sustainable tracking app built with React Native and Tailwind, focusing on minimal design and smooth interactions.",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "Bento Grid Dashboard",
+    description: "Learn how to create a bento grid with Tailwind CSS, Next.js and Framer Motion. Exploring modern UI patterns.",
+    image: "https://assets.aceternity.com/blog/how-to-create-a-bento-grid.png",
+  },
+  {
+    title: "Serenity Wellness",
+    description: "Web experience for a wellness center, featuring soft pastel colors, liquid transitions, and noise backgrounds.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "Glassmorphism UI Kit",
+    description: "A comprehensive UI kit for Figma that helps designers create beautiful, translucent interfaces with ease.",
+    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "Fintech Dashboard",
+    description: "A clean and modern financial dashboard focusing on data visualization, typography, and user accessibility.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    title: "Luxe E-Commerce",
+    description: "Redesign of a luxury fashion e-commerce platform with smooth page transitions and a minimalist aesthetic.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+  }
+];
+---
+<section id="work" class="py-32 md:py-40 bg-canvas relative overflow-hidden z-0 isolate">
+  <div class="container mx-auto px-6 relative z-10">
+    {!hideTitle && (
+      <div class="max-w-3xl mx-auto text-center mb-16 md:mb-24 mt-8">
+        <h2 class="text-4xl md:text-6xl font-serif text-ink tracking-tight mb-6">
+          Selected <span class="text-ink-muted">Works</span>
+        </h2>
+        <p class="text-lg md:text-xl text-ink-muted leading-relaxed max-w-2xl mx-auto">
+          A collection of digital experiences designed with focus on aesthetics, usability, and modern web technologies.
+        </p>
+      </div>
+    )}
+
+    <ExpandableProjectGrid client:visible projects={projects} />
+  </div>
+</section>
